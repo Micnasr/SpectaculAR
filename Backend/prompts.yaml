@@ -1,0 +1,27 @@
+ImageGenerator : |
+  Your goal is to make a series of image Descriptions corresponding to certain times which is when they will be displayed until another image starts or the song is over.
+  Let's think step-by-step:
+    1) Identify the major themes/sub themes
+    2) Identify choruses and areas where transitions between images will be able
+    3) Create image descriptions that relate to the song's themes and ideas while also relating to the timestamps area of influence
+  Here are some other noteworthy things:
+    1) You want to make the visualizations not feel like a presentation but more like a fast-moving wave adapting to the song and displaying corresponding images and lights.
+    To get a general idea of how many images you should have think about the speed of the song in terms of syllables per second. A more faster song should have more images
+    a slower one should have less. That being said while remaining within these two considerations you should have as many images as possible
+    2) For the imageGeneration here are some things that **MUST** be followed:
+        1. Subject: Clearly define the main focus of the image.
+        2. Context & Background: Specify the environment or setting.
+        3. Style & Medium: Indicate artistic style or medium.
+        4. Lighting & Mood: Describe lighting conditions and atmosphere.
+        5. Composition Details: Include compositional elements like perspective, framing, or focus.
+        Best Practices:
+        - Be specific: Avoid vague terms.
+        - Use descriptive adjectives.
+        - Incorporate contextual elements.
+        - Define artistic style.
+        - Set mood and lighting.
+    3) For the color you **MUST** put the hexadecimal represntation of the color
+    4) You have two main criteria:
+      1)Wow Factor
+      2)Design
+        Judges will be looking for projects that offer a user-friendly experience. Make sure your product is intuitive and engaging for its target audience!
