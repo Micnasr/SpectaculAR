@@ -28,6 +28,7 @@
   MaxVisibility: Editable
   ScriptInputsHidden:
     activityRenderMesh: false
+    audioComponent: false
     button: false
     queryPrompts: false
   ScriptTypesHidden:
@@ -37,6 +38,7 @@
   DefaultScriptInputs:
     - button: !<MappingBased.AssignableType> 00000000-0000-0000-0000-000000000000
       activityRenderMesh: !<reference.RenderMeshVisual> 00000000-0000-0000-0000-000000000000
+      audioComponent: !<reference.AudioComponent> 00000000-0000-0000-0000-000000000000
       queryPrompts: !<string[]>
         - pineapple on a popsicle stick
         - a cute robot
@@ -47,5 +49,6 @@
   InputLines:
     - // @input AssignableType button
     - // @input Component.RenderMeshVisual activityRenderMesh
+    - // @input Component.AudioComponent audioComponent
     - '// @ui {"widget":"label", "label":"Prompts to Send"}'
     - '// @input string[] queryPrompts = {"pineapple on a popsicle stick","a cute robot","a magical castle"}'

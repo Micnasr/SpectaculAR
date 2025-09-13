@@ -9,6 +9,7 @@
     - !<own> 867a6806-8d0e-4a93-8b86-ef91522c708d
     - !<own> e98b2a4f-f300-4094-a125-464834a4be87
     - !<own> 362d712d-3aa2-470c-8b9d-9b6467c32954
+    - !<own> 77b231ac-53e8-4e02-8390-9b8d6a9b4bb7
   layers: !<Layers/267ee9a7-aff2-4f9d-9a49-f71214747d03>
     userLayers:
       []
@@ -146,6 +147,7 @@
   ScriptAsset: !<reference> aceac444-d335-4431-b79d-680276f51da6
   ScriptInputsDefault:
     inputType: true
+    playAudio: true
     loops: true
     audioInputScript: true
     sampleRate: true
@@ -155,12 +157,12 @@
     {}
   ScriptInputs:
     "":
-      inputType: 1
+      inputType: 3
       audioTrack: !<reference.AudioTrackAsset> 722602c5-5472-44d2-82b6-9fa7d81de559
-      playAudio: true
+      playAudio: false
       loops: -1
       microphoneAudio: !<reference.AudioTrackAsset> 53f480ad-17b3-4821-942d-4065e7136c34
-      audioComponent: !<reference.AudioComponent> f01bbbd0-ad54-4ab2-bfef-3c10ad81758a
+      audioComponent: !<reference.AudioComponent> 95760cef-9631-4e88-88dd-b24eec82312e
       audioInputScript: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
       sampleRate: 44100
       frameSize: 1024
@@ -313,6 +315,7 @@
     "":
       button: !<MappingBased.AssignableType> a83be36e-9c45-4b32-8569-666eaf1a8759
       activityRenderMesh: !<reference.RenderMeshVisual> d9430ac5-85c2-4f6f-99ab-e7c4d4dae40e
+      audioComponent: !<reference.AudioComponent> 95760cef-9631-4e88-88dd-b24eec82312e
       queryPrompts: !<string[]>
         - pineapple on a popsicle stick
         - a cute robot
@@ -2126,6 +2129,21 @@
     - !<own> e0c838a2-fdd6-406e-8404-1fc871cbdb6e
   Components:
     []
+- !<SceneObject/77b231ac-53e8-4e02-8390-9b8d6a9b4bb7>
+  PrefabRemaps:
+    []
+  Name: AudioPlayer
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> 95760cef-9631-4e88-88dd-b24eec82312e
 - !<SceneObject/7b9d067f-414a-4620-a6b1-b0824953478c>
   PrefabRemaps:
     []
@@ -2402,6 +2420,23 @@
     - !<own> a4be667c-356e-4cf4-81ef-21e3e55cb1c2
   Components:
     []
+- !<AudioComponent/95760cef-9631-4e88-88dd-b24eec82312e>
+  PrefabRemaps:
+    []
+  Name: Audio
+  Enabled: true
+  AudioTrack: !<reference> 722602c5-5472-44d2-82b6-9fa7d81de559
+  EnableAutoplayLoop: false
+  Volume: 1.000000
+  EnableMixToSnap: false
+  RecordVolume: 1.000000
+  EnableSpatialAudio: false
+  EnableDistanceEffect: false
+  CurveType: Logarithm
+  MinDistance: 0.000000
+  MaxDistance: 100.000000
+  EnableDirectivityEffect: false
+  EnablePositionEffect: false
 - !<SceneObject/974e2072-cd2a-4664-8d91-d71bbcd60d54>
   PrefabRemaps:
     []

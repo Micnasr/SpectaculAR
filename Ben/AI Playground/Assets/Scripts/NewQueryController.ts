@@ -10,6 +10,9 @@ export class NewQueryController extends BaseScriptComponent {
 
   @input
   private activityRenderMesh: RenderMeshVisual;
+    
+  @input
+  private audioComponent: AudioComponent;
 
   private activityMaterial: Material;
 
@@ -33,6 +36,8 @@ export class NewQueryController extends BaseScriptComponent {
     // When the button is pinched, send all prompts at once
     this.button.onButtonPinched.add(() => {
       this.animateVoiceIndicator(true);
+            
+      this.audioComponent.play(-1);
 
       // Send all prompts from the list
       this.onQueryEvent.invoke(this.queryPrompts);
