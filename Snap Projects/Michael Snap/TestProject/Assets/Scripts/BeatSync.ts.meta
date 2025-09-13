@@ -1,0 +1,50 @@
+- !<AssetImportMetadata/3a61f22d-1983-4bab-938d-f65ab9374fd7>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> b9e1d0a0-f349-42df-98d5-c60d48cc7807
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> b9e1d0a0-f349-42df-98d5-c60d48cc7807
+  PackageType: NotAPackage
+  PackagePolicy: CannotBeUnpacked
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> c6b3cb84-f148-44dc-8335-12331a864012
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/c6b3cb84-f148-44dc-8335-12331a864012>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: e6ed09a3-296c-45ee-871d-8d7abf77cfbf
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  CurrentVisibility: Editable
+  MaxVisibility: Editable
+  ScriptInputsHidden:
+    audioAnalyzerScript: false
+    frequencyBand: false
+    moveHeight: false
+    movementThreshold: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  DefaultScriptInputs:
+    - audioAnalyzerScript: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
+      moveHeight: !<float> 2.000000
+      frequencyBand: !<float> 0.000000
+      movementThreshold: 0.300000
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - '// @input Component.ScriptComponent audioAnalyzerScript {"hint":"Audio Analyzer Script Component"}'
+    - '// @input float moveHeight = 2 {"hint":"How high to move (0.1 - 5.0)"}'
+    - '// @input float frequencyBand {"hint":"Which frequency band to use (0 = bass, 7 = treble)"}'
+    - '// @input float movementThreshold = 0.3 {"hint":"Ignore movements below this energy level (0.1 - 0.8)"}'
