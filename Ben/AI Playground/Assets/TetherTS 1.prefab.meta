@@ -1,0 +1,79 @@
+- !<AssetImportMetadata/2cbffae4-9839-49f6-bc0c-6f87cc8fa905>
+  ImportedAssetIds:
+    ObjectPrefab: !<reference> 4a77067a-dc16-4496-a54d-20cb3b904412
+  ImporterName: ObjectPrefabImporter
+  PrimaryAsset: !<reference> 4a77067a-dc16-4496-a54d-20cb3b904412
+  PackageType: NotAPackage
+  PackagePolicy: CannotBeUnpacked
+  ExtraData:
+    {}
+  AssetDataMap:
+    ObjectPrefab: !<own> 5780aeb6-39d6-40b4-ba76-70d0b4e3c0bb
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<SceneObject/2b72ebf7-3fd1-42ab-a7d6-0fad55671481>
+  PrefabRemaps:
+    []
+  Name: TetherTS 1
+  Enabled: false
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: -100.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 10.000000, y: 10.000000, z: 10.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> 396795d9-b4b2-43f6-9052-d8ad98f0e98b
+    - !<own> 941d876c-e6ed-4ca7-8c98-7f38186c7cd8
+- !<ScriptComponent/396795d9-b4b2-43f6-9052-d8ad98f0e98b>
+  PrefabRemaps:
+    []
+  Name: TetherTS
+  Enabled: true
+  ScriptAsset: !<reference> 52125bba-b55f-4d1b-9873-6efa93b08e8b
+  ScriptInputsDefault:
+    verticalDistanceFromTarget: true
+    horizontalDistanceFromTarget: true
+    reorientDuringTargetRotation: true
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      target: !<reference.SceneObject> 00000000-0000-0065-0000-000000000064
+      verticalDistanceFromTarget: 0.100000
+      horizontalDistanceFromTarget: 0.100000
+      reorientDuringTargetRotation: true
+      flattenDuringTargetRotation: false
+      offset: !<Vec3> {x: 0.000000, y: 0.000000, z: -100.000000}
+      lerpSpeed: 5.090000
+  ScriptTypes:
+    "":
+      {}
+- !<ObjectPrefabAssetData/5780aeb6-39d6-40b4-ba76-70d0b4e3c0bb>
+  SourceRemaps:
+    - 4a77067a-dc16-4496-a54d-20cb3b904412: feb726c1-7631-4d73-8dac-ce72448d1174
+    - 9195efff-72b2-4bc7-b455-b8dbd6d1e1f5: 2b72ebf7-3fd1-42ab-a7d6-0fad55671481
+    - be3c0762-2eb2-4667-9895-aea980b43634: 941d876c-e6ed-4ca7-8c98-7f38186c7cd8
+    - e0d013f5-eb28-4753-93c2-5524eed8d983: 396795d9-b4b2-43f6-9052-d8ad98f0e98b
+  SourceState: !<own> feb726c1-7631-4d73-8dac-ce72448d1174
+- !<LookAtComponent/941d876c-e6ed-4ca7-8c98-7f38186c7cd8>
+  PrefabRemaps:
+    []
+  Name: Look At
+  Enabled: false
+  LookAtMode: LookAtPoint
+  AimVectors: NegativeZAimYUp
+  WorldUpVector: SceneY
+  Target: !<reference> 00000000-0000-0065-0000-000000000064
+  OffsetRotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+- !<ObjectPrefab/feb726c1-7631-4d73-8dac-ce72448d1174>
+  PackagePath: ""
+  objects:
+    - !<own> 2b72ebf7-3fd1-42ab-a7d6-0fad55671481
+  LazyLoading: false
+  RetainAssets: true
