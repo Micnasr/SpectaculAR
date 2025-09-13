@@ -40,7 +40,7 @@ def processPrompt(prompt):
         time.sleep(1)
         return processPrompt(prompt)
 
-with open("prompts.yaml", "r") as file:
+with open("prompts.yaml", "r",encoding="utf-8") as file:
     prompts = yaml.safe_load(file)
 async def getTranscript(f):
     try:
@@ -109,7 +109,7 @@ if __name__=="__main__":
 
 if __name__=="__mai__":
     start=time.time()
-    x=processPrompt("Anxiety Freestyle SleepyHallow")
-    print(x)
+    x=processPrompt("")
+    print(x["images"])
     end=time.time()
     print(f"It took {end-start}")
