@@ -10,8 +10,8 @@ import asyncio
 import time
 from ytapi import getYTqueries, getmp3,getYTurl
 import os
-from flask import Flask, request, jsonify
-client = genai.Client(api_key=GeminiApiKey())
+from flask import Flask, request, jsonify, send_file, after_this_request
+client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 app = Flask(__name__)
 class Transcript(BaseModel):
     minute:int
@@ -27,12 +27,12 @@ class URL(BaseModel):
 def processPrompt(prompt):
     try:
         url=getYTurl(prompt)
+        print(url)
         getmp3(url)
         file = glob.glob("*.mp3")[0]
         f = client.files.upload(file=file)
         x,y=asyncio.run(helper(f))
         client.files.delete(name=f.name) 
-        os.remove(file)
         dictionary={"transcript":x,"images":y}
         return dictionary
     except genai.errors.ServerError:
@@ -90,6 +90,7 @@ async def helper(f):
 
 @app.route("/song", methods=["GET"])
 def endpoint():
+
     prompt = request.args.get("prompt")
     if not prompt:
         return jsonify({"error": "Missing 'prompt' query parameter"}), 400
@@ -102,6 +103,19 @@ def endpoint():
         time.sleep(1)
         result = processPrompt(prompt)
         return jsonify(result)
+@app.route("/mp3", methods=["GET"])
+def getmp3file():
+    file = glob.glob("*.mp3")[0]
+
+    @after_this_request
+    def cleanup(response):
+        try:
+            os.remove(file)
+        except Exception as e:
+            print(f"Cleanup error: {e}")
+        return response
+
+    return send_file(file, mimetype="audio/mpeg", as_attachment=True)
 
 if __name__=="__main__":
     app.run(debug=True)
@@ -109,7 +123,7 @@ if __name__=="__main__":
 
 if __name__=="__mai__":
     start=time.time()
-    x=processPrompt("")
+    x=processPrompt("I will survive")
     print(x["images"])
     end=time.time()
     print(f"It took {end-start}")
