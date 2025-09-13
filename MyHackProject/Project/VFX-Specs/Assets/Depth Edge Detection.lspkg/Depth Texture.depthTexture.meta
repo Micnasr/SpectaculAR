@@ -1,0 +1,16 @@
+- !<AssetImportMetadata/c9f108ab-0514-501c-f0a5-f014f2baf49b>
+  ImportedAssetIds:
+    Texture: !<reference> 538f8d76-8245-456a-a1f7-a3b54d5d6467
+  ImporterName: DepthTextureImporter
+  PrimaryAsset: !<reference> 538f8d76-8245-456a-a1f7-a3b54d5d6467
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    {}
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000

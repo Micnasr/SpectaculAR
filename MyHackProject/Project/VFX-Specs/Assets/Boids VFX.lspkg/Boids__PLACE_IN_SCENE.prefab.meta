@@ -1,0 +1,72 @@
+- !<AssetImportMetadata/7b6fef57-3f05-93b1-1355-cc62f4c7fed7>
+  ImportedAssetIds:
+    ObjectPrefab: !<reference> fdbf76f6-4716-458c-8e77-49ce37a2af53
+  ImporterName: ObjectPrefabImporter
+  PrimaryAsset: !<reference> fdbf76f6-4716-458c-8e77-49ce37a2af53
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    AssetLibraryId: 2mGzSUlgoG0w38jxIO6kwd
+  AssetDataMap:
+    ObjectPrefab: !<own> 41c7ebd0-7382-4282-95de-638036f3c6ec
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<ObjectPrefab/1ca20e0d-d4a1-4171-b9ba-41358119eed2>
+  PackagePath: ""
+  objects:
+    - !<own> f5965d86-1a84-48a2-aaa5-8f011f3da791
+  LazyLoading: false
+  RetainAssets: true
+- !<ObjectPrefabAssetData/41c7ebd0-7382-4282-95de-638036f3c6ec>
+  SourceRemaps:
+    - 4a6a38bd-fca1-4c93-a604-e533f60000dd: 9cc85f34-cd37-42f2-ab01-6a6273d80a76
+    - 525972c4-d4f8-4de8-8e46-bf1791fa819d: 7ba57e76-7dc7-4398-85ae-4d25b842a596
+    - e9bc6874-1e69-45c6-b074-f44bd5095061: f5965d86-1a84-48a2-aaa5-8f011f3da791
+    - fdbf76f6-4716-458c-8e77-49ce37a2af53: 1ca20e0d-d4a1-4171-b9ba-41358119eed2
+  SourceState: !<own> 1ca20e0d-d4a1-4171-b9ba-41358119eed2
+- !<VFXComponent/7ba57e76-7dc7-4398-85ae-4d25b842a596>
+  PrefabRemaps:
+    []
+  Name: VFX Component
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  VFXAsset: !<reference> ec926214-33e0-4bc4-8e43-83f733ca185f
+- !<SceneObject/9cc85f34-cd37-42f2-ab01-6a6273d80a76>
+  PrefabRemaps:
+    []
+  Name: Boids VFX
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.904781, y: 0.000000, z: -2.393101}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> 7ba57e76-7dc7-4398-85ae-4d25b842a596
+- !<SceneObject/f5965d86-1a84-48a2-aaa5-8f011f3da791>
+  PrefabRemaps:
+    []
+  Name: Boids__PLACE_IN_SCENE
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 9cc85f34-cd37-42f2-ab01-6a6273d80a76
+  Components:
+    []

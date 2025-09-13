@@ -1,0 +1,33 @@
+- !<NativePackageDescriptor/7ec6024b-1ca5-41b7-a45b-539cf2de600b>
+  PackagePath: ""
+  StudioVersion:
+    major: 5
+    minor: 13
+    patch: 1
+    build: 25090323
+    type: Unset
+    buildFlavor: ""
+    timestamp: 0
+    commit: ""
+  Description: Boids VFX Simulate a school of fish or a flock of birds by using a 3d noise texture force and an animated attractor force. Click here to learn more about VFX Editor
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  VersionMajor: 1
+  VersionMinor: 0
+  VersionPatch: 0
+  UpdateCheckpoint: 73
+  ExportUid: 6278f728-87af-42d8-8d0f-0917e0ba7bf8
+  ComponentUid: 38fee14b-1ff7-42e2-91f0-87afb4348d0c
+  PackagePolicy: CanBeUnpackedTransparent
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  Instantiable: !<reference> 00000000-0000-0000-0000-000000000000
+  AssetLibraryDependencyStructure: !<AssetLibraryDependencyStructure>
+    Name: ""
+    AssetId: ""
+    Hash: ""
+    Version:
+      major: 0
+      minor: 0
+      patch: 0
+      build: 0

@@ -1,0 +1,45 @@
+- !<AssetImportMetadata/39903c2f-0612-550c-a8c7-05b136cb2e8f>
+  ImportedAssetIds:
+    JavaScriptAsset: !<reference> 39222acf-46b5-4475-8847-c6a5ea746d9e
+  ImporterName: JavaScriptAssetImporter
+  PrimaryAsset: !<reference> 39222acf-46b5-4475-8847-c6a5ea746d9e
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    JavaScriptAsset: !<own> 68881ee0-28d6-458f-9a3a-1676d97780a1
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<ScriptAssetData/68881ee0-28d6-458f-9a3a-1676d97780a1>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 1
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: 3c24bd20-6a7b-4664-9b41-f27d3ba5c2c7
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    VFXComponent: false
+    body: false
+    bodyRMV: false
+    bodyTracking: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  DefaultScriptInputs:
+    - bodyTracking: !<reference.ObjectTracking3D> 00000000-0000-0000-0000-000000000000
+      VFXComponent: !<reference.VFXComponent> 00000000-0000-0000-0000-000000000000
+      body: !<reference.Material> 00000000-0000-0000-0000-000000000000
+      bodyRMV: !<reference.RenderMeshVisual[]>
+        []
+  ScriptTypes:
+    -
+      {}
