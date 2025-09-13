@@ -1,0 +1,33 @@
+- !<NativePackageDescriptor/e848993a-d4e0-4e9e-9256-9814530b76bd>
+  PackagePath: ""
+  StudioVersion:
+    major: 5
+    minor: 13
+    patch: 1
+    build: 25090323
+    type: Unset
+    buildFlavor: ""
+    timestamp: 0
+    commit: ""
+  Description: "Nuclei Particles sticking to the Body Mesh effect The VFX asset, materials and code have a bunch of comments, More on twitter And Instagram"
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  VersionMajor: 1
+  VersionMinor: 0
+  VersionPatch: 0
+  UpdateCheckpoint: 73
+  ExportUid: eb68b213-c732-4969-973e-b5b4fb651d68
+  ComponentUid: a81d94ed-3241-4de8-95e9-b920566b08a0
+  PackagePolicy: CanBeUnpackedTransparent
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  Instantiable: !<reference> 00000000-0000-0000-0000-000000000000
+  AssetLibraryDependencyStructure: !<AssetLibraryDependencyStructure>
+    Name: ""
+    AssetId: ""
+    Hash: ""
+    Version:
+      major: 0
+      minor: 0
+      patch: 0
+      build: 0

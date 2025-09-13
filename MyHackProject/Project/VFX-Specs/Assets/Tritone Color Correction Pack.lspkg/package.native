@@ -1,0 +1,33 @@
+- !<NativePackageDescriptor/eef584bf-8d90-4cff-bc1c-51207dd8f581>
+  PackagePath: ""
+  StudioVersion:
+    major: 5
+    minor: 13
+    patch: 1
+    build: 25090323
+    type: Unset
+    buildFlavor: ""
+    timestamp: 0
+    commit: ""
+  Description: Tritone Color Correction Pack This pack contains 11 different color correction textures. Click here to learn more on how to use Color Correction Post Effect
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  VersionMajor: 1
+  VersionMinor: 0
+  VersionPatch: 0
+  UpdateCheckpoint: 73
+  ExportUid: e9465125-e51d-4048-a9a6-968a57d9a63f
+  ComponentUid: a3a5a6cd-b09b-4b9b-993a-4407e7397262
+  PackagePolicy: CanBeUnpackedTransparent
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  Instantiable: !<reference> 00000000-0000-0000-0000-000000000000
+  AssetLibraryDependencyStructure: !<AssetLibraryDependencyStructure>
+    Name: ""
+    AssetId: ""
+    Hash: ""
+    Version:
+      major: 0
+      minor: 0
+      patch: 0
+      build: 0

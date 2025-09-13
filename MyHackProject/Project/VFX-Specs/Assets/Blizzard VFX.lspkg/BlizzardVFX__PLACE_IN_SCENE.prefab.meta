@@ -1,0 +1,56 @@
+- !<AssetImportMetadata/0652632e-2c0d-d159-8ac6-a9f6f7ed910e>
+  ImportedAssetIds:
+    ObjectPrefab: !<reference> 366d9fea-ffdb-4805-8490-ba6ca21f9a1e
+  ImporterName: ObjectPrefabImporter
+  PrimaryAsset: !<reference> 366d9fea-ffdb-4805-8490-ba6ca21f9a1e
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    ObjectPrefab: !<own> a56c7ef3-dfb5-4212-bd78-67c75561e3fa
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<SceneObject/25b716c2-2b0f-43c7-8f68-db8092c810d9>
+  PrefabRemaps:
+    []
+  Name: BlizzardVFX__PLACE_IN_SCENE
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> cad631ea-8c62-4043-9be7-60adc72277e2
+- !<ObjectPrefabAssetData/a56c7ef3-dfb5-4212-bd78-67c75561e3fa>
+  SourceRemaps:
+    - 366d9fea-ffdb-4805-8490-ba6ca21f9a1e: fb4e9a68-ecd2-4671-8793-a72122821943
+    - a2e49acb-f826-4875-a18a-bf1b49d92379: cad631ea-8c62-4043-9be7-60adc72277e2
+    - d5ea6767-7dc3-42b9-ab1f-ced860ab73b6: 25b716c2-2b0f-43c7-8f68-db8092c810d9
+  SourceState: !<own> fb4e9a68-ecd2-4671-8793-a72122821943
+- !<VFXComponent/cad631ea-8c62-4043-9be7-60adc72277e2>
+  PrefabRemaps:
+    []
+  Name: VFX Component
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  VFXAsset: !<reference> 35450bdb-c9a8-496b-9b6a-df160be15475
+- !<ObjectPrefab/fb4e9a68-ecd2-4671-8793-a72122821943>
+  PackagePath: ""
+  objects:
+    - !<own> 25b716c2-2b0f-43c7-8f68-db8092c810d9
+  LazyLoading: false
+  RetainAssets: true
