@@ -14,14 +14,14 @@ from flask import Flask, request, jsonify
 client = genai.Client(api_key=GeminiApiKey())
 app = Flask(__name__)
 class Transcript(BaseModel):
-    Minute:int
-    Second:int
-    Line:str
+    minute:int
+    second:int
+    line:str
 class Object(BaseModel):
-    Minute:int
-    Second:int
+    minute:int
+    second:int
     colour:str
-    ObjectDescription:str
+    objectDescription:str
 class URL(BaseModel):
     url:str
 def processPrompt(prompt):
