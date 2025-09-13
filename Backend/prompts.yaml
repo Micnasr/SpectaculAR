@@ -1,28 +1,38 @@
 ImageGenerator : |
-  Your goal is to make a series of image Descriptions corresponding to certain times which is when they will be displayed until another image starts or the song is over.
+  Your goal is to make a series of 3D object Descriptions corresponding to certain times which is when they will be displayed until another object starts or the song is over.
   Let's think step-by-step:
     1) Identify the major themes/sub themes
     2) Identify choruses and areas where transitions between images will be able
     3) Create image descriptions that relate to the song's themes and ideas while also relating to the timestamps area of influence
   Here are some other noteworthy things:
-    1) You want to make the visualizations not feel like a presentation but more like a fast-moving wave adapting to the song and displaying corresponding images and lights.
-    To get a general idea of how many images you should have think about the speed of the song in terms of syllables per second. A more faster song should have more images
-    a slower one should have less. That being said while remaining within these two considerations you should have as many images as possible
-    2) For the imageGeneration here are some things that **MUST** be followed:
-        1. Subject: Clearly define the main focus of the image.
-        2. Context & Background: Specify the environment or setting.
-        3. Style & Medium: Indicate artistic style or medium.
-        4. Lighting & Mood: Describe lighting conditions and atmosphere.
-        5. Composition Details: Include compositional elements like perspective, framing, or focus.
-        Best Practices:
-        - Be specific: Avoid vague terms.
-        - Use descriptive adjectives.
-        - Incorporate contextual elements.
-        - Define artistic style.
-        - Set mood and lighting.
-    3) For the color you **MUST** put the hexadecimal represntation of the color
-    4) You have two main criteria:
+    1)You should be aiming for an image around every 8 seconds
+    2) For the color you **MUST** put the hexadecimal represntation of the color
+    3) You have two main criteria:
       1)Wow Factor
       2)Design
         Judges will be looking for projects that offer a user-friendly experience. Make sure your product is intuitive and engaging for its target audience!
-    5) These are all 3d objects in an AR envirionment so make your ImageDescription accordingly
+    4) For the imageGeneration here are some things that **MUST** be followed:
+      1)Avoid too many details
+        Be descriptive about your asset's main properties (main color or attributes you wish your asset to have). However, try to keep it simple.
+        ✅Good: dragon with emerald green scales, large wings, fiery eyes
+        👎Bad: dragon, deep emerald green scales with subtle blue undertones, massive wings spanning twenty feet with intricate vein patterns, fiery eyes glowing with a detailed fiery texture, sharp claws detailed with worn edges
+      2)Use comma-separated phrases, not sentences:
+        It is best to divide long sentence descriptions into context phrases of 2-3 words separated by a comma symbol.
+        ✅Good: unicorn, white fur, spiraled horn, golden hooves, highres
+        👎Bad: Create a unicorn with white fur, a spiraled horn, and golden hooves; ensure it's a high-quality, high-resolution, high-polygon model
+      3) Don't use “a 3d model of…” or alternatives
+        Don't specify the wording mentioning explicitly that you want a 3d model - this might result in less detailed generations.
+        ✅Good: a playful corgi dog
+        👎Bad: a playful corgi dog as a 3d model
+      4) Describe the object, not the scene
+        Current version of the tool does not support 3D scene reconstruction - it will only generate a single 3D model.
+        ✅Good: an american eagle statue, high quality
+        👎Bad: an american eagle flying in an empty forest, high quality statue
+      5) The words at the start of your prompt have the most influence and should fully reflect the concept.
+        ✅Good: big sunglasses, green good quality, highres,
+        👎Bad: highres, hi-poly, good quality, 3d model, sunglasses
+      6) The description of the image to be generated **MUST** be G rated
+                **INCORRECT**: guns, blood, drugs etc
+                  ->In this case you need to find a different object to put
+
+    
