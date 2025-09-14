@@ -1,0 +1,44 @@
+- !<AssetImportMetadata/72b2ed3d-3f9f-4f80-9c1e-15918cf74228>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> c24e142a-5a30-42bf-a65a-d0f510b655a0
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> c24e142a-5a30-42bf-a65a-d0f510b655a0
+  PackageType: NotAPackage
+  PackagePolicy: CannotBeUnpacked
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> bf580a0f-74ba-40d1-b8ff-46945ffaed04
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/bf580a0f-74ba-40d1-b8ff-46945ffaed04>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: 6a685fe8-3593-4d7e-849d-49f88f1cc5a3
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  CurrentVisibility: Editable
+  MaxVisibility: Editable
+  ScriptInputsHidden:
+    childIndex: false
+    factory: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  DefaultScriptInputs:
+    - factory: !<MappingBased.AssignableType> 00000000-0000-0000-0000-000000000000
+      childIndex: !<float> 0.000000
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - // @input AssignableType factory
+    - '// @input float childIndex {"widget":"slider", "min":0, "max":10, "step":1}'
