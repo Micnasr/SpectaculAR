@@ -29,6 +29,7 @@
     Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
     HasSegmentScaleCompensation: false
   Children:
+    - !<own> 40b37ca0-30bd-4213-be60-c934e32a640a
     - !<own> 8aaa5a3a-3847-4a93-afd0-3eefd7f6ad9b
     - !<own> 546c26ec-6159-4560-aae8-a89b382b225b
   Components:
@@ -309,6 +310,22 @@
     - !<own> 2b48df55-44c4-4516-b674-91f4c5d5481b
   Components:
     []
+- !<SceneObject/1941bf1c-4ff9-43dd-ab40-80d9746fa538>
+  PrefabRemaps:
+    []
+  Name: Beats
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 0.250000, y: 0.250000, z: 0.250000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> e9333003-c61f-4554-83bf-9d2de2446133
+    - !<own> e4b61a4b-ee8d-4493-b3bf-d89d3e7810b3
 - !<SceneObject/19a941d1-b036-4302-bf17-e1533b0a3330>
   PrefabRemaps:
     []
@@ -895,18 +912,15 @@
   Enabled: true
   ScriptAsset: !<reference> 3a35737a-f9c8-407e-a75f-c15e21262369
   ScriptInputsDefault:
-    baseUrl: true
-    mp3Url: true
     autoPlay: true
   ScriptTypesDefault:
     {}
   ScriptInputs:
     "":
       asrQueryController: !<MappingBased.AssignableType> bb75c141-c5df-4bac-953d-a6160723868c
-      baseUrl: "http://127.0.0.1:5000/song?prompt="
-      mp3Url: "http://127.0.0.1:5000/mp3"
       audioChild: !<reference.SceneObject> 19a941d1-b036-4302-bf17-e1533b0a3330
       autoPlay: true
+      audioAnalyzerScript: !<reference.ScriptComponent> ae026e50-b11d-477d-a5c0-2417b2f78bcb
   ScriptTypes:
     "":
       {}
@@ -1098,6 +1112,25 @@
     - !<own> 3d7828ee-2891-4454-9f06-7d3aa618c06b
   Components:
     []
+- !<SceneObject/40b37ca0-30bd-4213-be60-c934e32a640a>
+  PrefabRemaps:
+    - 1941bf1c-4ff9-43dd-ab40-80d9746fa538: 1de172b7-78c6-41ce-91fe-85be179decf2
+    - 40b37ca0-30bd-4213-be60-c934e32a640a: 9ecdfb40-830e-488e-8c01-452a5556acaa
+    - ae026e50-b11d-477d-a5c0-2417b2f78bcb: 98dfc9c0-ea51-4d24-afad-8893b90d54f4
+    - e4b61a4b-ee8d-4493-b3bf-d89d3e7810b3: cd4372ef-c9f3-4499-b80a-d21999f89f47
+    - e9333003-c61f-4554-83bf-9d2de2446133: 9d11dad2-f5a3-4451-9ab6-a6373d3a48c7
+  Name: Audio_Analyzer
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: -1.976214, y: -0.000004, z: -83.039459}
+    Rotation: {x: 0.000000, y: -0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 1941bf1c-4ff9-43dd-ab40-80d9746fa538
+  Components:
+    - !<own> ae026e50-b11d-477d-a5c0-2417b2f78bcb
 - !<SceneObject/40f477a9-ee22-4ef3-a789-f73b447844f0>
   PrefabRemaps:
     []
@@ -3034,6 +3067,41 @@
   ScriptTypes:
     "":
       {}
+- !<ScriptComponent/ae026e50-b11d-477d-a5c0-2417b2f78bcb>
+  PrefabRemaps:
+    []
+  Name: AudioAnalyzer
+  Enabled: true
+  ScriptAsset: !<reference> aceac444-d335-4431-b79d-680276f51da6
+  ScriptInputsDefault:
+    inputType: true
+    playAudio: true
+    loops: true
+    audioInputScript: true
+    sampleRate: true
+    fftSize: true
+    numMel: true
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      inputType: 3
+      audioTrack: !<reference.AudioTrackAsset> 722602c5-5472-44d2-82b6-9fa7d81de559
+      playAudio: false
+      loops: -1
+      microphoneAudio: !<reference.AudioTrackAsset> 53f480ad-17b3-4821-942d-4065e7136c34
+      audioComponent: !<reference.AudioComponent> 4f6faba9-c55d-4e32-b652-fa1c01ff0cb0
+      audioInputScript: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
+      sampleRate: 44100
+      frameSize: 1024
+      hopSize: 256
+      fftSize: 2048
+      numMel: 8
+      minFreq: !<float> 60.000000
+      maxFreq: !<float> 4000.000000
+  ScriptTypes:
+    "":
+      {}
 - !<ColliderComponent/ae91c092-7ebd-4575-b722-caba129e194e>
   PrefabRemaps:
     []
@@ -4041,6 +4109,106 @@
     []
   Components:
     - !<own> 4aa30a81-2a3a-4c2d-a9fa-30d11d91584f
+- !<ScriptComponent/e4b61a4b-ee8d-4493-b3bf-d89d3e7810b3>
+  PrefabRemaps:
+    []
+  Name: AudioAnalyzerHelper
+  Enabled: true
+  ScriptAsset: !<reference> 72b56171-207d-4b2c-8b0b-7ed3e5ae758b
+  ScriptInputsDefault:
+    index: true
+    lerpCoef: true
+    transformObject: true
+    transformType: true
+    local: true
+    transformMode: true
+    startVec3Transform: true
+    endVec3Transform: true
+    offset: true
+    meshWithBlendshapes: true
+    blendshapeName: true
+    startWeight: true
+    endWeight: true
+    assetValueType: true
+    startAssetVec2: true
+    endAssetVec2: true
+    startAssetVec3: true
+    endAssetVec3: true
+    startAssetVec4: true
+    endAssetVec4: true
+    startAssetRGB: true
+    endAssetRGB: true
+    startAssetRGBA: true
+    endAssetRGBA: true
+    startAssetRect: true
+    endAssetRect: true
+    scriptWithApi: true
+    valueType: true
+    startFloat: true
+    startVec2: true
+    startVec3: true
+    startVec4: true
+    startRGB: true
+    endRGB: true
+    startRGBA: true
+    endRGBA: true
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      audioAnalyzerScript: !<reference.ScriptComponent> ae026e50-b11d-477d-a5c0-2417b2f78bcb
+      bandType: 2
+      index: 0
+      smoothType: 2
+      step: 0.550000
+      lerpCoef: 0.500000
+      responseType: 3
+      transformObject: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      transformType: Position
+      local: false
+      transformMode: 0
+      startVec3Transform: !<Vec3> {x: 0.000000, y: 0.000000, z: 0.000000}
+      endVec3Transform: !<Vec3> {x: 1.000000, y: 1.000000, z: 1.000000}
+      offset: !<Vec3> {x: 1.000000, y: 1.000000, z: 1.000000}
+      meshWithBlendshapes: !<reference.RenderMeshVisual> 00000000-0000-0000-0000-000000000000
+      blendshapeName: ""
+      startWeight: !<float> 0.000000
+      endWeight: !<float> 1.000000
+      asset: !<reference.Asset> 97876cd9-bdd2-4abc-aaa0-38be634782a9
+      parameter: floatArray
+      assetValueType: 0
+      startAssetFloat: !<float> 1.000000
+      endAssetFloat: 3.700000
+      startAssetVec2: !<Vec2> {x: 0.000000, y: 0.000000}
+      endAssetVec2: !<Vec2> {x: 1.000000, y: 1.000000}
+      startAssetVec3: !<Vec3> {x: 0.000000, y: 0.000000, z: 0.000000}
+      endAssetVec3: !<Vec3> {x: 1.000000, y: 1.000000, z: 1.000000}
+      startAssetVec4: !<Vec4> {x: 0.000000, y: 0.000000, z: 0.000000, w: 0.000000}
+      endAssetVec4: !<Vec4> {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+      startAssetRGB: !<Vec3> {x: 0.000000, y: 0.000000, z: 0.000000}
+      endAssetRGB: !<Vec3> {x: 1.000000, y: 1.000000, z: 1.000000}
+      startAssetRGBA: !<Vec4> {x: 0.000000, y: 0.000000, z: 0.000000, w: 1.000000}
+      endAssetRGBA: !<Vec4> {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+      startAssetRect: !<Vec4> {x: -1.000000, y: 1.000000, z: -1.000000, w: 1.000000}
+      endAssetRect: !<Vec4> {x: -1.000000, y: 1.000000, z: -1.000000, w: 1.000000}
+      scriptWithApi: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
+      functionName: updateValue
+      valueType: 0
+      startFloat: !<float> 0.000000
+      endFloat: !<float> 0.000000
+      startVec2: !<Vec2> {x: 0.000000, y: 0.000000}
+      endVec2: !<Vec2> {x: 0.000000, y: 0.000000}
+      startVec3: !<Vec3> {x: 0.000000, y: 0.000000, z: 0.000000}
+      endVec3: !<Vec3> {x: 0.000000, y: 0.000000, z: 0.000000}
+      startVec4: !<Vec4> {x: 0.000000, y: 0.000000, z: 0.000000, w: 0.000000}
+      endVec4: !<Vec4> {x: 0.000000, y: 0.000000, z: 0.000000, w: 0.000000}
+      startRGB: !<Vec3> {x: 0.000000, y: 0.000000, z: 0.000000}
+      endRGB: !<Vec3> {x: 1.000000, y: 1.000000, z: 1.000000}
+      startRGBA: !<Vec4> {x: 0.000000, y: 0.000000, z: 0.000000, w: 1.000000}
+      endRGBA: !<Vec4> {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ScriptTypes:
+    "":
+      {}
 - !<DeviceTracking/e5553c8a-0b7e-4ef4-92d9-3e1318fb82c1>
   PrefabRemaps:
     []
@@ -4081,6 +4249,45 @@
     []
   Components:
     []
+- !<RenderMeshVisual/e9333003-c61f-4554-83bf-9d2de2446133>
+  PrefabRemaps:
+    []
+  Name: Render Mesh Visual
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> 97876cd9-bdd2-4abc-aaa0-38be634782a9
+  Mesh: !<reference> b47aa6af-6ce7-4911-a60a-04653dd7ed86
+  Skin: !<reference> 00000000-0000-0000-0000-000000000000
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}
+  RayTracing: !<RayTracingVisualSettings>
+    Reflections:
+      caster: false
+      receiver: false
+      receiverLayers: 1
+      planar:
+        enabled: true
+        roughHarden: 0.500000
+        roughCurve: 2.000000
+    GlobalIllumination:
+      caster: false
+      receiver: false
+      receiverLayers: 1
+    Shadows:
+      caster: false
+      receiver: false
+      receiverLayers: 1
+    Material: !<reference> 00000000-0000-0000-0000-000000000000
+    HideFromCamera: false
 - !<SceneObject/e98b2a4f-f300-4094-a125-464834a4be87>
   PrefabRemaps:
     []

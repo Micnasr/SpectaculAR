@@ -28,6 +28,7 @@
   MaxVisibility: Editable
   ScriptInputsHidden:
     asrQueryController: false
+    audioAnalyzerScript: false
     audioChild: false
     autoPlay: false
   ScriptTypesHidden:
@@ -38,6 +39,7 @@
     - asrQueryController: !<MappingBased.AssignableType> 00000000-0000-0000-0000-000000000000
       audioChild: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       autoPlay: true
+      audioAnalyzerScript: !<reference.ScriptComponent> 00000000-0000-0000-0000-000000000000
   ScriptTypes:
     -
       {}
@@ -49,3 +51,4 @@
     - '// @ui {"widget":"label", "label":"Audio Configuration"}'
     - // @input SceneObject audioChild
     - // @input bool autoPlay = true
+    - '// @input Component.ScriptComponent audioAnalyzerScript {"hint":"Reference to AudioAnalyzer script"}'
