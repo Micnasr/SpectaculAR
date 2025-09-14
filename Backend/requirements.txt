@@ -1,0 +1,9 @@
+google-genai
+pydantic
+pyyaml
+requests
+hypercorn
+yt-dlp
+ffmpeg-python
+quart
+werkzeug<3.0.0

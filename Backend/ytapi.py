@@ -3,7 +3,8 @@ import os
 import subprocess
 import sys
 def getmp3(url):
-    subprocess.run([sys.executable, "-m", "yt_dlp","-x","--audio-format", "mp3","--no-playlist","-o",r"%(title)s.%(ext)s",url])
+    x=subprocess.run([sys.executable, "-m", "yt_dlp","-x","--audio-format", "mp3","--no-playlist","-o",r"%(title)s.%(ext)s",url])
+    print(x)
 
 def getYTqueries(searchQuery:str)->list[dict[str:str]]:
     """Allows you to run youtube search queries will
@@ -43,6 +44,7 @@ def getYTurl(searchQuery):
     }
 
     resp = requests.get(url, params=params)
+    print(resp)
     lst=[]
     data = resp.json()
     for item in data.get("items", []):
@@ -50,4 +52,5 @@ def getYTurl(searchQuery):
         return f"https://www.youtube.com/watch?v={video_id}"
 
 if __name__=="__main__":
-    getmp3("https://www.youtube.com/watch?v=6dYWe1c3OyU")
+    x=getYTurl("Don't Stop Believing")
+    getmp3(x)

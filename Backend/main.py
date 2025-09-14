@@ -9,9 +9,9 @@ import asyncio
 import time
 from ytapi import getYTqueries, getmp3,getYTurl
 import os
-from flask import Flask, request, jsonify, send_file, after_this_request
+from quart import Quart, request, jsonify, send_file
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
-app = Flask(__name__)
+app = Quart(__name__)
 class Transcript(BaseModel):
     minute:int
     second:int
@@ -19,25 +19,47 @@ class Transcript(BaseModel):
 class Object(BaseModel):
     minute:int
     second:int
-    colour:str
     objectDescription:str
+class Number(BaseModel):
+    index:int
 class URL(BaseModel):
     url:str
-def processPrompt(prompt):
+async def chooseMP3file(prompt):
     try:
-        url=getYTurl(prompt)
-        print(url)
-        getmp3(url)
-        file = glob.glob("*.mp3")[0]
+        files = glob.glob("*.mp3")
+        print(files,prompt)
+        response = await client.aio.models.generate_content(
+            model='gemini-1.5-flash-8b',
+            contents=f"List of songs {files} and inividual song {prompt}",
+            config=types.GenerateContentConfig(
+                temperature=0,
+                system_instruction="""You are given a list of songs and an indvidual song. There exists one that matches best with the individual song. Return
+                the index of that one in the list remember the first index is 0""",
+                response_mime_type= 'application/json',
+                response_schema= Number)      
+        )
+        index=json.loads(response.text)["index"]
+        print(index)
+        return files[index]
+    except genai.errors.ServerError:
+        print("Server Error")
+        await asyncio.sleep(1)
+        return await chooseMP3file(prompt)
+
+
+async def processPrompt(prompt):
+    try:
+        file = await chooseMP3file(prompt)
+        print(file)
         f = client.files.upload(file=file)
-        x,y=asyncio.run(helper(f))
+        x,y=await helper(f)
         client.files.delete(name=f.name) 
         dictionary={"transcript":x,"images":y}
         return dictionary
     except genai.errors.ServerError:
         print("Server Error")
-        time.sleep(1)
-        return processPrompt(prompt)
+        await asyncio.sleep(1)
+        return await processPrompt(prompt)
 
 with open("prompts.yaml", "r",encoding="utf-8") as file:
     prompts = yaml.safe_load(file)
@@ -53,15 +75,14 @@ async def getTranscript(f):
                     to get the transcript if possible and then do the time mapping.
                     You **MUST** continue until the end of the song""",
                 response_mime_type= 'application/json',
-                response_schema= list[Transcript],)
-                
-                
+                response_schema= list[Transcript],)      
         )
+        print(response.text)
         return json.loads(response.text)
 
     except genai.errors.ServerError:
         print("Server Error")
-        time.sleep(1)
+        await asyncio.sleep(1)
         return await getTranscript(f)
 async def ImageGenerator(f):
     try:
@@ -75,7 +96,7 @@ async def ImageGenerator(f):
         return json.loads(response.text)
     except genai.errors.ServerError:
         print("Server Error")
-        time.sleep(1)
+        await asyncio.sleep(1)
         return await ImageGenerator(f)
 
 async def helper(f):
@@ -88,41 +109,35 @@ async def helper(f):
     return transcript,image_response
 
 @app.route("/song", methods=["GET"])
-def endpoint():
+async def endpoint():
 
     prompt = request.args.get("prompt")
     if not prompt:
         return jsonify({"error": "Missing 'prompt' query parameter"}), 400
     
     try:
-        result = processPrompt(prompt)
+        result = await processPrompt(prompt)
         return jsonify(result)
     except genai.errors.ServerError:
         print("Server Error, retrying...")
-        time.sleep(1)
-        result = processPrompt(prompt)
+        await asyncio.sleep(1)
+        result =await  processPrompt(prompt)
         return jsonify(result)
 @app.route("/mp3", methods=["GET"])
-def getmp3file():
-    file = glob.glob("*.mp3")[0]
+async def getmp3file():
+    prompt = request.args.get("prompt")
+    if not prompt:
+        return jsonify({"error": "Missing 'prompt' query parameter"}), 400
+    file =await chooseMP3file(prompt)
+    return await send_file(file, mimetype="audio/mpeg", as_attachment=True)
 
-    @after_this_request
-    def cleanup(response):
-        try:
-            os.remove(file)
-        except Exception as e:
-            print(f"Cleanup error: {e}")
-        return response
-
-    return send_file(file, mimetype="audio/mpeg", as_attachment=True)
-
-if __name__=="__main__":
-    app.run(debug=True)
+if __name__=="__main__":  # default to 8080 if PORT not set
+    asyncio.run(app.run_task(host="0.0.0.0", port=8080))
 
 
 if __name__=="__mai__":
     start=time.time()
-    x=processPrompt("I will survive")
-    print(x["images"])
+    x=asyncio.run(processPrompt("Passionfruit"))
+    print(x)
     end=time.time()
     print(f"It took {end-start}")

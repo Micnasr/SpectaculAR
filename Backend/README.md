@@ -10,3 +10,4 @@ Images map to a list of dicts with keys: minute second,color(Maps to a hexadecim
 maps to the text representing the object to be generated
 
 minute and second represent the starting point of when the image should be displayed. They will end when a new image comes in or the song is over
+
