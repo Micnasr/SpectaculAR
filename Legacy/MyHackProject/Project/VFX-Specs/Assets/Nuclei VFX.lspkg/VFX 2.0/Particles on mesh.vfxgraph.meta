@@ -1,0 +1,82 @@
+- !<AssetImportMetadata/cf191956-4b54-b405-195f-0edd6a391694>
+  ImportedAssetIds:
+    VFXGraph: !<reference> ce8acd91-7649-4ee5-8b3a-77ea29a77c17
+  ImporterName: VFXAssetImporter
+  PrimaryAsset: !<reference> ce8acd91-7649-4ee5-8b3a-77ea29a77c17
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    VFXGraph: !<own> 232ed00c-d705-4a62-b745-4df2ba8c6d17
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<VFXAssetData/232ed00c-d705-4a62-b745-4df2ba8c6d17>
+  Mesh: !<reference> 00000000-0000-0000-0000-000000000000
+  SystemPassProperties:
+    39: !<VFXSystemPassProperties/c86de9b8-26e6-4fe2-843e-15e3899ed341>
+      FeedbackProperties:
+        {}
+      SimulateProperties:
+        posX:
+          typeIdx: 9
+          value:
+            id: bdc45b61-5e53-4525-9df3-aa91071818dc
+            sampler:
+              filteringMode: Nearest
+              wrapModeU: Repeat
+              wrapModeV: Repeat
+              wrapModeW: Repeat
+              borderColor: {x: 0.000000, y: 0.000000, z: 0.000000, w: 0.000000}
+              mipmaps: false
+            type: Texture2D
+        posY:
+          typeIdx: 9
+          value:
+            id: 1708e094-af67-4201-846d-c92a7b08b008
+            sampler:
+              filteringMode: Nearest
+              wrapModeU: Repeat
+              wrapModeV: Repeat
+              wrapModeW: Repeat
+              borderColor: {x: 0.000000, y: 0.000000, z: 0.000000, w: 0.000000}
+              mipmaps: false
+            type: Texture2D
+        posZ:
+          typeIdx: 9
+          value:
+            id: b2abfae6-17d6-474a-9d6f-603b0de3f07a
+            sampler:
+              filteringMode: Nearest
+              wrapModeU: Repeat
+              wrapModeV: Repeat
+              wrapModeW: Repeat
+              borderColor: {x: 0.000000, y: 0.000000, z: 0.000000, w: 0.000000}
+              mipmaps: false
+            type: Texture2D
+        startReveal:
+          typeIdx: 1
+          value: -1.000000
+        deviceTex:
+          typeIdx: 9
+          value:
+            id: ecab1b3c-f4f7-4cc7-950f-69ed8ad5d02b
+            sampler:
+              filteringMode: Nearest
+              wrapModeU: MirroredRepeat
+              wrapModeV: MirroredRepeat
+              wrapModeW: Repeat
+              borderColor: {x: 0.000000, y: 0.000000, z: 0.000000, w: 0.000000}
+              mipmaps: false
+            type: Texture2D
+      RenderProperties:
+        {}
+      FeedbackDefines:
+        []
+      SimulateDefines:
+        []
+      RenderDefines:
+        []

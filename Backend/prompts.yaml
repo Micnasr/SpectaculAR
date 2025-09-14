@@ -4,14 +4,17 @@ ImageGenerator : |
     1) Identify the major themes/sub themes
     2) Identify choruses and areas where transitions between images will be able
     3) Create image descriptions that relate to the song's themes and ideas while also relating to the timestamps area of influence
+  **MUST** dos:
+    1) You **MUST** start at t=0 and provide an image
+    2) For every 8 seconds you **MUST** provide an image
+    3) You **MUST** end so that images continue being generated every 8 seconds until the song is over
   Here are some other noteworthy things:
-    1)You should be aiming for an image around every 8 seconds
-    2) For the color you **MUST** put the hexadecimal represntation of the color
-    3) You have two main criteria:
+    1) You have two main criteria:
       1)Wow Factor
+        ->Focus on emotion and deeper meaning alongside with lyrics
       2)Design
         Judges will be looking for projects that offer a user-friendly experience. Make sure your product is intuitive and engaging for its target audience!
-    4) For the imageGeneration here are some things that **MUST** be followed:
+    2) For the imageGeneration here are some things that **MUST** be followed:
       1)Avoid too many details
         Be descriptive about your asset's main properties (main color or attributes you wish your asset to have). However, try to keep it simple.
         ✅Good: dragon with emerald green scales, large wings, fiery eyes
@@ -34,5 +37,6 @@ ImageGenerator : |
       6) The description of the image to be generated **MUST** be G rated
                 **INCORRECT**: guns, blood, drugs etc
                   ->In this case you need to find a different object to put
+    
 
     

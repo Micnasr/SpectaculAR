@@ -1,0 +1,73 @@
+- !<AssetImportMetadata/4c1ee6ce-1c97-040a-da34-95f61540190f>
+  ImportedAssetIds:
+    ObjectPrefab: !<reference> bfdf0874-7b31-48d8-8dc0-bdf44d4fb07f
+  ImporterName: ObjectPrefabImporter
+  PrimaryAsset: !<reference> bfdf0874-7b31-48d8-8dc0-bdf44d4fb07f
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    ObjectPrefab: !<own> 5f329872-0749-4aef-9de3-a6ae84463c1e
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<ObjectPrefabAssetData/5f329872-0749-4aef-9de3-a6ae84463c1e>
+  SourceRemaps:
+    - 4b567bbc-cdb0-47d7-9128-42f6645efe3f: b3d30d30-0c40-4bb0-a7eb-a3bb1e8082a7
+    - 995589eb-a31d-42cb-a431-4fc7c959b526: a16c1daa-a3c2-4b98-a4cc-4f2c9dd18cd6
+    - bfdf0874-7b31-48d8-8dc0-bdf44d4fb07f: fdc005be-e3a5-49ba-8aa4-511d7504f1a0
+    - c67d3742-7342-4744-be8e-839ee4ecd5af: 91d86678-72db-43ed-9e8b-30d52fac8f88
+  SourceState: !<own> fdc005be-e3a5-49ba-8aa4-511d7504f1a0
+- !<PostEffectVisual/91d86678-72db-43ed-9e8b-30d52fac8f88>
+  PrefabRemaps:
+    []
+  Name: Post Effect
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> 4c530cd5-9332-48ac-b50e-ff9b9d21db8e
+- !<SceneObject/a16c1daa-a3c2-4b98-a4cc-4f2c9dd18cd6>
+  PrefabRemaps:
+    []
+  Name: "Glitch [EDIT MATERIAL]"
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> 91d86678-72db-43ed-9e8b-30d52fac8f88
+- !<SceneObject/b3d30d30-0c40-4bb0-a7eb-a3bb1e8082a7>
+  PrefabRemaps:
+    []
+  Name: Advanced Glitch__PLACE_IN_SCENE
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> a16c1daa-a3c2-4b98-a4cc-4f2c9dd18cd6
+  Components:
+    []
+- !<ObjectPrefab/fdc005be-e3a5-49ba-8aa4-511d7504f1a0>
+  PackagePath: ""
+  objects:
+    - !<own> b3d30d30-0c40-4bb0-a7eb-a3bb1e8082a7
+  LazyLoading: false
+  RetainAssets: true

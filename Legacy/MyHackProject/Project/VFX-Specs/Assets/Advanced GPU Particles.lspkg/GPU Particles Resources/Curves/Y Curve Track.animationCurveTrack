@@ -1,0 +1,39 @@
+- !<AnimationCurveTrack/3b19ab9f-bb26-46a4-a034-4ddfd7d13973>
+  PackagePath: ""
+  TrackProperties:
+    - Curve 0
+  Properties:
+    Curve 0:
+      keyFrames:
+        - time: 0.004421
+          value:
+            data: -0.743561
+            leftTangent: Free
+            rightTangent: Free
+            weightedMode: None
+            inControlWeight: {x: 0.330000, y: 0.330000}
+            outControlWeight: {x: 0.471033, y: 0.005644}
+        - time: 0.248472
+          value:
+            data: 0.290626
+            leftTangent: Free
+            rightTangent: Free
+            weightedMode: None
+            inControlWeight: {x: 0.148516, y: 0.992583}
+            outControlWeight: {x: 0.463023, y: -0.000097}
+        - time: 0.712717
+          value:
+            data: -0.309140
+            leftTangent: Free
+            rightTangent: Free
+            weightedMode: None
+            inControlWeight: {x: 0.692215, y: 1.009925}
+            outControlWeight: {x: 0.632315, y: 0.006685}
+        - time: 0.965944
+          value:
+            data: 0.831379
+            leftTangent: Free
+            rightTangent: Free
+            weightedMode: None
+            inControlWeight: {x: 0.551245, y: 0.994600}
+            outControlWeight: {x: 0.660000, y: 0.660000}

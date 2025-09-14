@@ -1,0 +1,101 @@
+- !<AssetImportMetadata/8d04f429-c989-4c42-8308-d1def2d851ff>
+  ImportedAssetIds:
+    ObjectPrefab: !<reference> 78bb81f5-7c6b-4304-8807-b3a766132298
+  ImporterName: ObjectPrefabImporter
+  PrimaryAsset: !<reference> 78bb81f5-7c6b-4304-8807-b3a766132298
+  PackageType: NotAPackage
+  PackagePolicy: CannotBeUnpacked
+  ExtraData:
+    {}
+  AssetDataMap:
+    ObjectPrefab: !<own> 8d039e9a-ca18-4c16-8631-35d50b96ca48
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<ObjectPrefab/4f86a91c-2f94-47a6-bc73-f6babc73a043>
+  PackagePath: ""
+  objects:
+    - !<own> 64077a8e-32d5-4fee-888d-6d7f968f5d77
+  LazyLoading: false
+  RetainAssets: true
+- !<SceneObject/64077a8e-32d5-4fee-888d-6d7f968f5d77>
+  PrefabRemaps:
+    []
+  Name: TetherTSPrefab
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: -100.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 10.000000, y: 10.000000, z: 10.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> d5643b2f-7698-4b28-b150-43513b31885f
+    - !<own> ee4c49e6-2015-4ab3-8011-1c504ea40c8c
+    - !<own> 74acc069-2b70-47fa-a3bf-a5a0be4f6fa7
+- !<LookAtComponent/74acc069-2b70-47fa-a3bf-a5a0be4f6fa7>
+  PrefabRemaps:
+    []
+  Name: Look At
+  Enabled: true
+  LookAtMode: LookAtPoint
+  AimVectors: NegativeZAimYUp
+  WorldUpVector: SceneY
+  Target: !<reference> 00000000-0000-0065-0000-000000000064
+  OffsetRotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+- !<ObjectPrefabAssetData/8d039e9a-ca18-4c16-8631-35d50b96ca48>
+  SourceRemaps:
+    - 037b8af5-6562-4de7-af6d-886ce6d16452: 64077a8e-32d5-4fee-888d-6d7f968f5d77
+    - 03db5a96-c593-4f68-8063-89d46708f14d: ee4c49e6-2015-4ab3-8011-1c504ea40c8c
+    - 27cb8d20-2770-4618-981f-5b2781b4d269: d5643b2f-7698-4b28-b150-43513b31885f
+    - 2eec2eb8-0ee3-4621-896e-1e20928f2215: 74acc069-2b70-47fa-a3bf-a5a0be4f6fa7
+    - 78bb81f5-7c6b-4304-8807-b3a766132298: 4f86a91c-2f94-47a6-bc73-f6babc73a043
+  SourceState: !<own> 4f86a91c-2f94-47a6-bc73-f6babc73a043
+- !<RenderMeshVisual/d5643b2f-7698-4b28-b150-43513b31885f>
+  PrefabRemaps:
+    []
+  Name: Render Mesh Visual
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> a11233ef-cd39-478f-bcf7-46cbb31d5268
+  Mesh: !<reference> 14ebb9cc-d722-4c7a-9ab3-8b8f41d60ded
+  Skin: !<reference> 00000000-0000-0000-0000-000000000000
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}
+- !<ScriptComponent/ee4c49e6-2015-4ab3-8011-1c504ea40c8c>
+  PrefabRemaps:
+    []
+  Name: TetherTS
+  Enabled: true
+  ScriptAsset: !<reference> 52125bba-b55f-4d1b-9873-6efa93b08e8b
+  ScriptInputsDefault:
+    verticalDistanceFromTarget: true
+    horizontalDistanceFromTarget: true
+    reorientDuringTargetRotation: true
+  ScriptTypesDefault:
+    {}
+  ScriptInputs:
+    "":
+      target: !<reference.SceneObject> 00000000-0000-0065-0000-000000000064
+      verticalDistanceFromTarget: 0.100000
+      horizontalDistanceFromTarget: 0.100000
+      reorientDuringTargetRotation: true
+      flattenDuringTargetRotation: false
+      offset: !<Vec3> {x: 0.000000, y: 0.000000, z: -100.000000}
+      lerpSpeed: !<float> 1.000000
+  ScriptTypes:
+    "":
+      {}
