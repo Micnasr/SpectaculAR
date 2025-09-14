@@ -1,7 +1,7 @@
 import requests
 import time
 url = "https://hackthenorth-api-942206148236.us-central1.run.app/song"
-params = {"prompt": "Yes"}
+params = {"prompt": "Summer"}
 
 response = requests.get(url,params=params)
 print(response.text)

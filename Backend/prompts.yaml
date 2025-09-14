@@ -1,17 +1,20 @@
 ImageGenerator : |
   Your goal is to make a series of 3D object Descriptions corresponding to certain times which is when they will be displayed until another object starts or the song is over.
-  Let's think step-by-step:
-    1) Identify the major themes/sub themes
-    2) Identify choruses and areas where transitions between images will be able
-    3) Create image descriptions that relate to the song's themes and ideas while also relating to the timestamps area of influence
   **MUST** dos:
     1) You **MUST** start at t=0 and provide an image
     2) For every 8 seconds you **MUST** provide an image
     3) You **MUST** end so that images continue being generated every 8 seconds until the song is over
+    4) The description of the image to be generated **MUST** be G rated
+  **MUST NOT** dos:
+    1) You **MUST NOT** write about any graphic imagery, violence
+      ->This does not allow you to ignore the MUST DOS
+    2) You **MUST NOT** write about guns, blood, drugs etc
+      ->This does not allow you to ignore the MUST DOS
+  3) You **MUST NOT** repeat images
+     ->This does not allow you to ignore the MUST DOS
   Here are some other noteworthy things:
     1) You have two main criteria:
       1)Wow Factor
-        ->Focus on emotion and deeper meaning alongside with lyrics
       2)Design
         Judges will be looking for projects that offer a user-friendly experience. Make sure your product is intuitive and engaging for its target audience!
     2) For the imageGeneration here are some things that **MUST** be followed:
@@ -34,9 +37,6 @@ ImageGenerator : |
       5) The words at the start of your prompt have the most influence and should fully reflect the concept.
         ✅Good: big sunglasses, green good quality, highres,
         👎Bad: highres, hi-poly, good quality, 3d model, sunglasses
-      6) The description of the image to be generated **MUST** be G rated
-                **INCORRECT**: guns, blood, drugs etc
-                  ->In this case you need to find a different object to put
     
 
     

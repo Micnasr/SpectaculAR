@@ -1,4 +1,3 @@
-
 from google import genai
 from google.genai import types
 from pydantic import BaseModel
@@ -66,7 +65,7 @@ with open("prompts.yaml", "r",encoding="utf-8") as file:
 async def getTranscript(f):
     try:
         response = await client.aio.models.generate_content(
-            model='gemini-2.0-flash',
+            model='gemini-2.5-flash-lite',
             contents=[f],
             config=types.GenerateContentConfig(
                 temperature=0,
@@ -87,7 +86,7 @@ async def getTranscript(f):
 async def ImageGenerator(f):
     try:
         response = await client.aio.models.generate_content(
-            model='gemini-2.0-flash',
+            model='gemini-2.5-flash-lite',
             contents=[f],
             config=types.GenerateContentConfig(response_mime_type= 'application/json',
                 response_schema= list[Object],
