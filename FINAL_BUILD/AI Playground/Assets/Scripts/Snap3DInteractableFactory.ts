@@ -115,6 +115,12 @@ export class Snap3DInteractableFactory extends BaseScriptComponent {
       })
         .then((submitGetStatusResults) => {
           submitGetStatusResults.event.add(([value, assetOrError]) => {
+            // Check if object was cancelled before processing
+            if (snap3DInteractable.isObjectCancelled()) {
+              print(`[Snap3DFactory] Ignoring update for cancelled object: ${outputObj.name}`);
+              return;
+            }
+
             if (value === "image") {
               assetOrError = assetOrError as Snap3DTypes.TextureAssetData;
               snap3DInteractable.setImage(assetOrError.texture);
@@ -141,7 +147,10 @@ export class Snap3DInteractableFactory extends BaseScriptComponent {
           });
         })
         .catch((error) => {
-          snap3DInteractable.onFailure(error);
+          // Only call onFailure if object wasn't cancelled
+          if (!snap3DInteractable.isObjectCancelled()) {
+            snap3DInteractable.onFailure(error);
+          }
           print("Error submitting task or getting status: " + error);
           reject("Failed to create mesh with prompt: " + input);
         });
@@ -283,6 +292,70 @@ export class Snap3DInteractableFactory extends BaseScriptComponent {
   }
 
   /**
+   * Cancel a specific child object by index
+   */
+  public cancelChild(index: number): boolean {
+    const childrenCount = this.sceneObject.getChildrenCount();
+    if (childrenCount === 0 || index < 0 || index >= childrenCount) {
+      print(`Invalid child index for cancellation: ${index}. Valid range: 0-${childrenCount - 1}`);
+      return false;
+    }
+
+    const targetChild = this.sceneObject.getChild(index);
+    const snap3DInteractable = targetChild.getComponent(Snap3DInteractable.getTypeName());
+    
+    if (snap3DInteractable) {
+      snap3DInteractable.cancel();
+      print(`Cancelled child at index ${index}: ${targetChild.name}`);
+      return true;
+    }
+    
+    return false;
+  }
+
+  /**
+   * Cancel all children objects
+   */
+  public cancelAllChildren(): void {
+    const childrenCount = this.sceneObject.getChildrenCount();
+    for (let i = 0; i < childrenCount; i++) {
+      const child = this.sceneObject.getChild(i);
+      const snap3DInteractable = child.getComponent(Snap3DInteractable.getTypeName());
+      if (snap3DInteractable) {
+        snap3DInteractable.cancel();
+      }
+    }
+    print(`Cancelled all ${childrenCount} children`);
+  }
+
+  /**
+   * Get status of all children (cancelled, loading, etc.)
+   */
+  public getChildrenStatus(): string[] {
+    const childrenCount = this.sceneObject.getChildrenCount();
+    const statuses: string[] = [];
+    
+    for (let i = 0; i < childrenCount; i++) {
+      const child = this.sceneObject.getChild(i);
+      const snap3DInteractable = child.getComponent(Snap3DInteractable.getTypeName());
+      
+      if (snap3DInteractable) {
+        let status = `Child ${i}: ${child.name}`;
+        if (snap3DInteractable.isObjectCancelled()) {
+          status += " [CANCELLED]";
+        } else if (snap3DInteractable.isImageCurrentlyLoading()) {
+          status += " [LOADING IMAGE]";
+        } else {
+          status += " [ACTIVE]";
+        }
+        statuses.push(status);
+      }
+    }
+    
+    return statuses;
+  }
+
+  /**
    * Process the next batch of requests (up to 5)
    */
   private processNextBatch(overridePosition?: vec3): void {
@@ -334,5 +407,21 @@ export class Snap3DInteractableFactory extends BaseScriptComponent {
     if (this.requestQueue.length > 0) {
       this.processNextBatch();
     }
+  }
+
+  /**
+   * Clear the request queue and cancel all pending operations
+   */
+  public clearQueue(): void {
+    this.requestQueue = [];
+    this.cancelAllChildren();
+    print(`[Snap3DFactory] Cleared request queue and cancelled all children`);
+  }
+
+  /**
+   * Get current queue status
+   */
+  public getQueueStatus(): string {
+    return `Queue: ${this.requestQueue.length} pending, Processing: ${this.isProcessingBatch}, Current batch: ${this.currentBatch.length}`;
   }
 }

@@ -9,10 +9,14 @@ export class ASRQueryController extends BaseScriptComponent {
   private button: PinchButton;
   @input
   private activityRenderMesh: RenderMeshVisual;
+  @input
+  private textDisplay: Text;
   private activityMaterial: Material;
 
   private asrModule: AsrModule = require("LensStudio:AsrModule");
   private isRecording: boolean = false;
+  private isEnabled: boolean = true;
+  private lastRecognizedQuery: string = "";
 
   public onQueryEvent: Event<string> = new Event<string>();
 
@@ -26,7 +30,27 @@ export class ASRQueryController extends BaseScriptComponent {
     this.activityRenderMesh.mainMaterial = this.activityMaterial;
     this.activityMaterial.mainPass.in_out = 0;
     this.button.onButtonPinched.add(() => {
+      if (!this.isEnabled) {
+        print("🎤 [ASRQueryController] Controller is disabled - ignoring button press");
+        if (this.textDisplay) {
+          // Keep showing the last recognized query
+          if (this.lastRecognizedQuery) {
+            this.textDisplay.text = this.lastRecognizedQuery;
+          } else {
+            this.textDisplay.text = "Ready to listen";
+          }
+        }
+        return;
+      }
+      
       this.getVoiceQuery().then((query) => {
+        // Store the recognized query
+        this.lastRecognizedQuery = query;
+        
+        // Display the recognized text
+        if (this.textDisplay) {
+          this.textDisplay.text = query;
+        }
         this.onQueryEvent.invoke(query);
       });
     });
@@ -42,6 +66,12 @@ export class ASRQueryController extends BaseScriptComponent {
         return;
       }
       this.isRecording = true;
+      
+      // Show recording status
+      if (this.textDisplay) {
+        this.textDisplay.text = "Listening...";
+      }
+      
       let asrSettings = AsrModule.AsrTranscriptionOptions.create();
       asrSettings.mode = AsrModule.AsrMode.HighAccuracy;
       asrSettings.silenceUntilTerminationMs = 1000;
@@ -56,6 +86,12 @@ export class ASRQueryController extends BaseScriptComponent {
       asrSettings.onTranscriptionErrorEvent.add((asrOutput) => {
         this.isRecording = false;
         this.animateVoiceIndicator(false);
+        
+        // Show error message
+        if (this.textDisplay) {
+          this.textDisplay.text = "Error: " + asrOutput;
+        }
+        
         reject(asrOutput);
       });
       this.animateVoiceIndicator(true);
@@ -78,6 +114,56 @@ export class ASRQueryController extends BaseScriptComponent {
           this.activityMaterial.mainPass.in_out = percent;
         })
         .start();
+    }
+  }
+
+  // Public methods to enable/disable the ASR controller
+  public enableASR() {
+    print("🎤 [ASRQueryController] Enabling ASR controller");
+    this.isEnabled = true;
+    if (this.textDisplay) {
+      // Show the last recognized query if available, otherwise show ready message
+      if (this.lastRecognizedQuery) {
+        this.textDisplay.text = this.lastRecognizedQuery;
+      } else {
+        this.textDisplay.text = "Ready to listen";
+      }
+    }
+  }
+
+  public disableASR() {
+    print("🎤 [ASRQueryController] Disabling ASR controller");
+    this.isEnabled = false;
+    
+    // Stop any ongoing recording
+    if (this.isRecording) {
+      this.animateVoiceIndicator(false);
+      this.asrModule.stopTranscribing();
+      this.isRecording = false;
+    }
+    
+    if (this.textDisplay) {
+      // Keep the last recognized query displayed, or show a default message if none
+      if (this.lastRecognizedQuery) {
+        this.textDisplay.text = this.lastRecognizedQuery;
+      } else {
+        this.textDisplay.text = "Ready to listen";
+      }
+    }
+  }
+
+  public isASREnabled(): boolean {
+    return this.isEnabled;
+  }
+
+  public getLastRecognizedQuery(): string {
+    return this.lastRecognizedQuery;
+  }
+
+  public clearLastRecognizedQuery() {
+    this.lastRecognizedQuery = "";
+    if (this.textDisplay) {
+      this.textDisplay.text = "Ready to listen";
     }
   }
 }

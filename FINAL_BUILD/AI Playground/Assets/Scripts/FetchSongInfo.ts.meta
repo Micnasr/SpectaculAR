@@ -31,6 +31,8 @@
     audioAnalyzerObject: false
     audioChild: false
     autoPlay: false
+    countdownText: false
+    loadingTipFrame: false
     newQueryController: false
     snap3DFactory: false
   ScriptTypesHidden:
@@ -44,6 +46,8 @@
       audioChild: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       autoPlay: true
       audioAnalyzerObject: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      countdownText: !<reference.Text> 00000000-0000-0000-0000-000000000000
+      loadingTipFrame: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
   ScriptTypes:
     -
       {}
@@ -66,3 +70,9 @@
     - '// @ui {"widget":"separator"}'
     - '// @ui {"widget":"label", "label":"Audio Analyzer Integration"}'
     - // @input SceneObject audioAnalyzerObject
+    - '// @ui {"widget":"separator"}'
+    - '// @ui {"widget":"label", "label":"Countdown Display"}'
+    - // @input Component.Text countdownText
+    - '// @ui {"widget":"separator"}'
+    - '// @ui {"widget":"label", "label":"Loading Tip Frame"}'
+    - // @input SceneObject loadingTipFrame

@@ -12,6 +12,7 @@ interface ImageData {
 
 interface SongResponse {
   images: ImageData[];
+  transcript: any[]; // We don't use this, but it's in the response
   song: string;
   mp3_url: string;
 }
@@ -36,9 +37,9 @@ export class FetchSongInfo extends BaseScriptComponent {
   @ui.separator
   @ui.label("API Configuration")
 //  @input
-  private baseUrl: string = "http://localhost:5001/song?prompt="//"https://hackthenorth-api-942206148236.us-central1.run.app/song?prompt=";
+  private baseUrl: string = "https://hackthenorth-api-942206148236.us-central1.run.app/song?prompt=";
 //  @input
-  private mp3Url: string = "http://localhost:5001/mp3"//"https://hackthenorth-api-942206148236.us-central1.run.app/mp3"//"http://1.1.1"//"http://127.0.0.1:5000/mp3";
+  private mp3Url: string = "https://hackthenorth-api-942206148236.us-central1.run.app/mp3?prompt="//"http://1.1.1"//"http://127.0.0.1:5000/mp3";
   
   @ui.separator
   @ui.label("Audio Configuration")
@@ -51,6 +52,16 @@ export class FetchSongInfo extends BaseScriptComponent {
   @ui.label("Audio Analyzer Integration")
   @input
   private audioAnalyzerObject: SceneObject;
+  
+  @ui.separator
+  @ui.label("Countdown Display")
+  @input
+  private countdownText: Text;
+  
+  @ui.separator
+  @ui.label("Loading Tip Frame")
+  @input
+  private loadingTipFrame: SceneObject;
   
   private internetModule: InternetModule = require("LensStudio:InternetModule");
   private remoteServiceModule: RemoteServiceModule = require("LensStudio:RemoteServiceModule");
@@ -96,9 +107,28 @@ export class FetchSongInfo extends BaseScriptComponent {
     this.createEvent("UpdateEvent").bind(() => {
       if (this.isWaitingToPlay) {
         this.audioPlayDelayTimer += getDeltaTime();
-        if (this.audioPlayDelayTimer >= 30) {
+        
+        // Calculate remaining time and update countdown display
+        const remainingTime = Math.max(0, 45 - this.audioPlayDelayTimer);
+        const remainingSeconds = Math.ceil(remainingTime);
+        
+        if (this.countdownText) {
+          if (remainingSeconds > 0) {
+            this.countdownText.text = `Your experience will begin in ${remainingSeconds} seconds...`;
+          } else {
+            this.countdownText.text = "Starting now!";
+          }
+        }
+        
+        if (this.audioPlayDelayTimer >= 45) {
           this.isWaitingToPlay = false;
           this.audioPlayDelayTimer = 0;
+          
+          // Clear countdown text
+          if (this.countdownText) {
+            this.countdownText.text = "";
+          }
+          
           this.playAudioAfterDelay();
         }
       }
@@ -111,6 +141,16 @@ export class FetchSongInfo extends BaseScriptComponent {
       print("❌ [FetchSongInfo] ERROR: No song name provided");
       this.songInfoReceived.invoke('Error: No song name provided');
       return;
+    }
+    
+    // Disable ASR controller to prevent multiple requests
+    if (this.asrQueryController) {
+      this.asrQueryController.disableASR();
+    }
+    
+    // Show fetching status
+    if (this.countdownText) {
+      this.countdownText.text = "Fetching song...";
     }
     
     const url = this.baseUrl + encodeURIComponent(songName);
@@ -163,8 +203,15 @@ export class FetchSongInfo extends BaseScriptComponent {
           if (songResponse.images && songResponse.images.length > 0) {
             const objectDescriptions = songResponse.images.map(img => img.objectDescription);
             this.imageTimingData = songResponse.images.map(img => img.minute * 60 + img.second); // Convert to total seconds
+            
+            // Log detailed timing conversion for debugging
             print(`✅ [FetchSongInfo] SUCCESS: Extracted ${objectDescriptions.length} object descriptions: ${objectDescriptions.join(', ')}`);
-            print(`✅ [FetchSongInfo] SUCCESS: Extracted timing data: ${this.imageTimingData.join(', ')} seconds`);
+            print(`✅ [FetchSongInfo] SUCCESS: Timing conversion details:`);
+            songResponse.images.forEach((img, index) => {
+              const totalSeconds = img.minute * 60 + img.second;
+              print(`  ${index}: ${img.minute}m ${img.second}s = ${totalSeconds}s - "${img.objectDescription}"`);
+            });
+            print(`✅ [FetchSongInfo] SUCCESS: Final timing data array: [${this.imageTimingData.join(', ')}] seconds`);
             
             // Pass object descriptions to NewQueryController
             if (this.newQueryController) {
@@ -195,9 +242,14 @@ export class FetchSongInfo extends BaseScriptComponent {
           // Invoke event with the song info
           this.songInfoReceived.invoke(JSON.stringify(songResponse, null, 2));
           
+          // Show downloading status
+          if (this.countdownText) {
+            this.countdownText.text = "Downloading audio...";
+          }
+          
           // Download the MP3 file from the fixed endpoint
           print("🎵 [FetchSongInfo] Song info received, now downloading MP3...");
-          this.downloadMP3(this.mp3Url);
+          this.downloadMP3(this.mp3Url + encodeURIComponent(songName));
           
           print("✅ [FetchSongInfo] SUCCESS: Complete song fetch process completed successfully");
           print(`✅ [FetchSongInfo] SUCCESS: Ready to download MP3 for song: "${songResponse.song}"`);
@@ -205,11 +257,23 @@ export class FetchSongInfo extends BaseScriptComponent {
         } catch (parseError) {
           print('❌ [FetchSongInfo] Failed to parse song response: ' + parseError);
           print('❌ [FetchSongInfo] Raw response that failed to parse: ' + text);
+          
+          // Show error in countdown text
+          if (this.countdownText) {
+            this.countdownText.text = "Error: Invalid response from server";
+          }
+          
           this.songInfoReceived.invoke('Error: Invalid response from server');
         }
       })
       .catch((error) => {
         print('❌ [FetchSongInfo] Fetch error: ' + error);
+        
+        // Show error in countdown text
+        if (this.countdownText) {
+          this.countdownText.text = "Error: Failed to fetch song data";
+        }
+        
         this.songInfoReceived.invoke('Error: Failed to fetch song data');
       });
   }
@@ -225,8 +289,13 @@ export class FetchSongInfo extends BaseScriptComponent {
   // Method to manually download MP3 (for testing)
   public downloadMP3Manually() {
     print("🎵 [FetchSongInfo] downloadMP3Manually() called");
-    print(`🎵 [FetchSongInfo] Manually downloading MP3 from: ${this.mp3Url}`);
-    this.downloadMP3();
+    if (!this.currentSongName) {
+      print("❌ [FetchSongInfo] ERROR: No current song name available for MP3 download");
+      return;
+    }
+    const mp3UrlWithPrompt = this.mp3Url + encodeURIComponent(this.currentSongName);
+    print(`🎵 [FetchSongInfo] Manually downloading MP3 from: ${mp3UrlWithPrompt}`);
+    this.downloadMP3(mp3UrlWithPrompt);
   }
   
   // Audio control methods
@@ -283,6 +352,17 @@ export class FetchSongInfo extends BaseScriptComponent {
     // Disable AudioAnalyzer when stopping audio
     this.disableAudioAnalyzer();
     
+    // Clear countdown text and disable loading tip frame when stopping
+    if (this.countdownText) {
+      this.countdownText.text = "";
+    }
+    this.disableLoadingTipFrame();
+    
+    // Re-enable ASR controller when song stops
+    if (this.asrQueryController) {
+      this.asrQueryController.enableASR();
+    }
+    
     // Stop the Snap3D Factory timing system
     if (this.snap3DFactory) {
       print("🎵 [FetchSongInfo] Stopping Snap3D Factory timing system...");
@@ -316,9 +396,65 @@ export class FetchSongInfo extends BaseScriptComponent {
     return this.currentSongName;
   }
   
+  // Method to manually start countdown
+  public startCountdown(duration: number = 45) {
+    print(`🎵 [FetchSongInfo] startCountdown() called with duration: ${duration} seconds`);
+    
+    if (this.isWaitingToPlay) {
+      print("⚠️ [FetchSongInfo] WARNING: Countdown already in progress");
+      return;
+    }
+    
+    this.isWaitingToPlay = true;
+    this.audioPlayDelayTimer = 0;
+    
+    // Show initial countdown message
+    if (this.countdownText) {
+      this.countdownText.text = `Starting in ${duration} seconds...`;
+    }
+    
+    print(`✅ [FetchSongInfo] Countdown started for ${duration} seconds`);
+  }
+  
+  // Method to stop countdown
+  public stopCountdown() {
+    print("🎵 [FetchSongInfo] stopCountdown() called");
+    
+    this.isWaitingToPlay = false;
+    this.audioPlayDelayTimer = 0;
+    
+    // Clear countdown text and disable loading tip frame
+    if (this.countdownText) {
+      this.countdownText.text = "";
+    }
+    this.disableLoadingTipFrame();
+    
+    // Re-enable ASR controller when countdown is stopped
+    if (this.asrQueryController) {
+      this.asrQueryController.enableASR();
+    }
+    
+    print("✅ [FetchSongInfo] Countdown stopped");
+  }
+  
+  // Method to manually re-enable ASR controller
+  public reEnableASR() {
+    print("🎵 [FetchSongInfo] reEnableASR() called");
+    
+    if (this.asrQueryController) {
+      this.asrQueryController.enableASR();
+      print("✅ [FetchSongInfo] ASR controller re-enabled");
+    } else {
+      print("⚠️ [FetchSongInfo] WARNING: No ASR controller assigned");
+    }
+  }
+  
   // Method to play audio after delay
   private playAudioAfterDelay() {
-    print('🎵 [FetchSongInfo] 30-second delay completed - starting playback...');
+    print('🎵 [FetchSongInfo] 45-second delay completed - starting playback...');
+    
+    // Disable loading tip frame when countdown ends and audio starts
+    this.disableLoadingTipFrame();
     
     if (!this.audioChild) {
       print("❌ [FetchSongInfo] ERROR: No audio child assigned");
@@ -381,6 +517,32 @@ export class FetchSongInfo extends BaseScriptComponent {
     return true;
   }
   
+  // Enable Loading Tip Frame
+  public enableLoadingTipFrame(): boolean {
+    if (!this.loadingTipFrame) {
+      print('🎵 [FetchSongInfo] No Loading Tip Frame assigned - cannot enable');
+      return false;
+    }
+    
+    print('🎵 [FetchSongInfo] ===== ENABLING LOADING TIP FRAME =====');
+    this.loadingTipFrame.enabled = true;
+    print('✅ [FetchSongInfo] Loading Tip Frame enabled successfully');
+    return true;
+  }
+  
+  // Disable Loading Tip Frame
+  public disableLoadingTipFrame(): boolean {
+    if (!this.loadingTipFrame) {
+      print('🎵 [FetchSongInfo] No Loading Tip Frame assigned - nothing to disable');
+      return false;
+    }
+    
+    print('🎵 [FetchSongInfo] ===== DISABLING LOADING TIP FRAME =====');
+    this.loadingTipFrame.enabled = false;
+    print('✅ [FetchSongInfo] Loading Tip Frame disabled successfully');
+    return true;
+  }
+  
   // Set the audio track to the specified audio child component and optionally play it
   private setAudioTrackToChild(audioTrackAsset: AudioTrackAsset) {
     print('🎵 [FetchSongInfo] ===== SETTING AUDIO TRACK TO CHILD =====');
@@ -405,12 +567,21 @@ export class FetchSongInfo extends BaseScriptComponent {
     print('✅ [FetchSongInfo] Audio track successfully assigned to AudioComponent');
     
     if (this.autoPlay) {
-      print('🎵 [FetchSongInfo] Auto-play enabled - waiting 30 seconds before starting playback...');
+      print('🎵 [FetchSongInfo] Auto-play enabled - waiting 45 seconds before starting playback...');
       
-      // Start the 30-second delay timer
+      // Enable loading tip frame during countdown
+      this.enableLoadingTipFrame();
+      
+      // Start the 45-second delay timer
       this.isWaitingToPlay = true;
       this.audioPlayDelayTimer = 0;
-      print('🎵 [FetchSongInfo] 30-second delay timer started');
+      
+      // Show initial countdown message
+      if (this.countdownText) {
+        this.countdownText.text = "Starting in 45 seconds...";
+      }
+      
+      print('🎵 [FetchSongInfo] 45-second delay timer started');
     } else {
       print('🎵 [FetchSongInfo] Audio track set but not playing (autoPlay is disabled)');
     }
@@ -476,6 +647,11 @@ export class FetchSongInfo extends BaseScriptComponent {
             print('❌ [FetchSongInfo] ===== MP3 DOWNLOAD FAILED =====');
             print(`❌ [FetchSongInfo] ERROR loading MP3 audio track: ${errorMessage}`);
             print(`❌ [FetchSongInfo] Failed at: ${new Date().toISOString()}`);
+            
+            // Show error in countdown text
+            if (this.countdownText) {
+              this.countdownText.text = "Error: Failed to download audio";
+            }
           }
         );
       } else {
@@ -486,6 +662,11 @@ export class FetchSongInfo extends BaseScriptComponent {
       print('❌ [FetchSongInfo] ===== EXCEPTION DURING DOWNLOAD =====');
       print(`❌ [FetchSongInfo] ERROR downloading MP3: ${error}`);
       print(`❌ [FetchSongInfo] Exception occurred at: ${new Date().toISOString()}`);
+      
+      // Show error in countdown text
+      if (this.countdownText) {
+        this.countdownText.text = "Error: Download failed";
+      }
     }
     
     print('🎵 [FetchSongInfo] ===== DOWNLOAD PROCESS COMPLETE =====');
